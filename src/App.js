@@ -60,8 +60,10 @@ function Bauuble({ vec = new THREE.Vector3(), ...props }) {
   );
 
   return (
-    <group>
-      <mesh />
+    <group ref={ref} dispose={null}>
+      <mesh castShadow receiveShadow scale={props.args} geometry={sphereGeometry} material={baubleMaterial}/>
+      <mesh castShadow scale={2.5 * props.agrs} position={[0, 0, -1.8 * props.args]}
+      geometry={nodes.Mesh_1.geometry} material={capMaterial}/>
     </group>
   );
 }
