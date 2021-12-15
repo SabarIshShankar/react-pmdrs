@@ -31,7 +31,7 @@ const baubles = [...Array(50)].map(() => ({
   linearDamping: 0.95
 }));
 
-function Bauuble({ vec = new THREE.Vector3(), ...props }) {
+function Bauble({ vec = new THREE.Vector3(), ...props }) {
   const { nodes } = useGLTF("cap.glb");
   const [ref, api] = useCompoundBody(() => ({
     ...props,
@@ -102,5 +102,23 @@ export const App = () => (
     }}
     camera={{ position: [0, 0, 20], fov: 35, near: 10, far: 40 }}
     onCreated={(state) => (state.mouse.toneMappingExposure = 1.5)}
-  ></Canvas>
+  >
+    <ambientLight intensity={0.75} />
+    <spotLight
+      position={[20, 20, 25]}
+      penumbra={1}
+      angle={0.2}
+      color="white"
+      castShadow
+      shadow-mapSize={[512, 512]}
+    />
+    <directionalLight position={[0, 5, -4]} intensity={4} />
+    <Physics gravity={[0, 0, 0]} iterations={10} broadphase="SAP">
+      <Collisions />
+
+      {baubles.map((props, i) => (
+        <Bauble key={i} {...props} />
+      ))}
+    </Physics>
+  </Canvas>
 );
