@@ -61,10 +61,33 @@ function Bauuble({ vec = new THREE.Vector3(), ...props }) {
 
   return (
     <group ref={ref} dispose={null}>
-      <mesh castShadow receiveShadow scale={props.args} geometry={sphereGeometry} material={baubleMaterial}/>
-      <mesh castShadow scale={2.5 * props.agrs} position={[0, 0, -1.8 * props.args]}
-      geometry={nodes.Mesh_1.geometry} material={capMaterial}/>
+      <mesh
+        castShadow
+        receiveShadow
+        scale={props.args}
+        geometry={sphereGeometry}
+        material={baubleMaterial}
+      />
+      <mesh
+        castShadow
+        scale={2.5 * props.agrs}
+        position={[0, 0, -1.8 * props.args]}
+        geometry={nodes.Mesh_1.geometry}
+        material={capMaterial}
+      />
     </group>
+  );
+}
+
+function Collisions() {
+  const viewport = useThree((state) => state.viewport);
+  usePlane(() => ({ position: [0, 0, 0], rotation: [0, 0, 0] }));
+  usePlane(() => ({ position: [0, 0, 8], rotation: [0, -Math.PI, 0] }));
+  usePlane(() => ({ position: [0, -4, 0], rotation: [-Math.PI / 2, 0, 0] }));
+  usePlane(() => ({ position: [0, 4, 0], rotation: [Math.PI / 2, 0, 0] }));
+  const [, api] = useSphere(() => ({ type: "Kinematic", args: [2] }));
+  return useFrame((state) =>
+    api.position.set((state.mouse.x * viewport.width) / 2, 2.5)
   );
 }
 export default function App() {
