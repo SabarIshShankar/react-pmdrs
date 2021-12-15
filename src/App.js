@@ -120,5 +120,22 @@ export const App = () => (
         <Bauble key={i} {...props} />
       ))}
     </Physics>
+    <Environment files="/adamsbridge.hdr" />
+    <EffectComposer multisampling={0}>
+      <SSAO
+        samples={11}
+        radius={30}
+        intensity={20}
+        luminanceInfluence={0.6}
+        color="red"
+      />
+      <SSAO
+        samples={21}
+        radius={5}
+        intensity={30}
+        luminanceInfluence={0.6}
+        color="red"
+      />
+    </EffectComposer>
   </Canvas>
 );
