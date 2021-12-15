@@ -90,11 +90,17 @@ function Collisions() {
     api.position.set((state.mouse.x * viewport.width) / 2, 2.5)
   );
 }
-export default function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
-  );
-}
+export const App = () => (
+  <Canvas
+    shadows
+    dpr={1.5}
+    gl={{
+      alpha: true,
+      stencil: false,
+      depth: false,
+      antialias: false
+    }}
+    camera={{ position: [0, 0, 20], fov: 35, near: 10, far: 40 }}
+    onCreated={(state) => (state.mouse.toneMappingExposure = 1.5)}
+  ></Canvas>
+);
