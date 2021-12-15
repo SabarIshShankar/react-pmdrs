@@ -1,12 +1,16 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom";
+import { Suspense } from "react";
+import { App } from "./App";
+import { Underlay, Overlay } from "./FigmaExport";
+import "./styles.css";
 
-import App from "./App";
-
-const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
+  <>
+    <Underlay />
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
+    <Overlay />
+  </>,
+  document.getElementById("root")
 );
