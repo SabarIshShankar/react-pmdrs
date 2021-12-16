@@ -36,9 +36,7 @@ export function Underlay() {
             color: "black",
             letterSpacing: -2
           }}
-        >
-          POIMANDRES
-        </p>
+        ></p>
         <div style={{ flex: "1 1 0%", display: "flex", gap: "2em" }}>
           <p
             className="full"
@@ -51,9 +49,7 @@ export function Underlay() {
               color: "black",
               whiteSpace: "nowrap"
             }}
-          >
-            DIVINE NAMES
-          </p>
+          ></p>
           <p
             className="full"
             style={{
@@ -64,9 +60,7 @@ export function Underlay() {
               textAlign: "center",
               color: "black"
             }}
-          >
-            CREATIONS
-          </p>
+          ></p>
           <p
             className="full"
             style={{
@@ -77,9 +71,7 @@ export function Underlay() {
               textAlign: "center",
               color: "black"
             }}
-          >
-            FORMATIONS
-          </p>
+          ></p>
           <p
             className="full"
             style={{
@@ -90,9 +82,7 @@ export function Underlay() {
               textAlign: "center",
               color: "black"
             }}
-          >
-            SUBSTANCES
-          </p>
+          ></p>
         </div>
         <p
           style={{
@@ -103,9 +93,7 @@ export function Underlay() {
             textAlign: "right",
             color: "black"
           }}
-        >
-          ⎑
-        </p>
+        ></p>
       </div>
       <div style={{ height: 60 }} />
       <div
@@ -126,13 +114,7 @@ export function Underlay() {
             lineHeight: "1.5em",
             color: "black"
           }}
-        >
-          <b>Stones, Metals and Gems</b>
-          <br />
-          A Universal Deity
-          <br />
-          <b>—</b>
-        </p>
+        ></p>
         <div style={{ width: 10 }} />
         <p
           style={{
@@ -145,9 +127,7 @@ export function Underlay() {
             color: "black",
             whiteSpace: "nowrap"
           }}
-        >
-          DRAG POINTER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ●
-        </p>
+        ></p>
       </div>
       <div style={{ height: 10 }} />
       <div
@@ -212,11 +192,7 @@ export function Underlay() {
             lineHeight: "1.5em",
             color: "black"
           }}
-        >
-          <b>Wonders of Antiquity</b>
-          <br />
-          Pythagorean Mathematics
-        </p>
+        ></p>
         <div style={{ width: 10 }} />
         <p
           className="full"
@@ -231,9 +207,7 @@ export function Underlay() {
             letterSpacing: -0.5,
             whiteSpace: "nowrap"
           }}
-        >
-          THE SUMMIT OF THE MANY
-        </p>
+        ></p>
         <div style={{ width: 10 }} />
         <p
           className="full"
@@ -261,11 +235,7 @@ export function Overlay() {
           textAlign: "right",
           color: "black"
         }}
-      >
-        <a href="http://pmnd.rs/">pmnd.rs</a>{" "}
-        <a href="https://github.com/pmndrs">git</a>{" "}
-        <a href="https://codesandbox.io/s/zxpv7">csb</a>
-      </p>
+      ></p>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import "./styles.css";
 import * as THREE from "three";
 import { useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -18,12 +17,11 @@ const baubleMaterial = new THREE.MeshLambertMaterial({
 const capMaterial = new THREE.MeshStandardMaterial({
   metalness: 1,
   roughness: 0.15,
-  color: "##8a300f",
+  color: "#8a300f",
   emissive: "#600000",
   envMapIntensity: 9
 });
-
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+const sphereGeometry = new THREE.BoxGeometry(1, 2, 2);
 const baubles = [...Array(50)].map(() => ({
   args: [0.6, 0.6, 0.8, 0.8, 1][Math.floor(Math.random() * 5)],
   mass: 1,
@@ -32,7 +30,6 @@ const baubles = [...Array(50)].map(() => ({
 }));
 
 function Bauble({ vec = new THREE.Vector3(), ...props }) {
-  const { nodes } = useGLTF("cap.glb");
   const [ref, api] = useCompoundBody(() => ({
     ...props,
     shapes: [
@@ -50,7 +47,7 @@ function Bauble({ vec = new THREE.Vector3(), ...props }) {
         api.applyForce(
           vec
             .set(...p)
-            .normaalize()
+            .normalize()
             .multiplyScalar(-props.args * 35)
             .toArray(),
           [0, 0, 0]
@@ -58,7 +55,6 @@ function Bauble({ vec = new THREE.Vector3(), ...props }) {
       ),
     [api]
   );
-
   return (
     <group ref={ref} dispose={null}>
       <mesh
@@ -70,9 +66,8 @@ function Bauble({ vec = new THREE.Vector3(), ...props }) {
       />
       <mesh
         castShadow
-        scale={2.5 * props.agrs}
+        scale={2.5 * props.args}
         position={[0, 0, -1.8 * props.args]}
-        geometry={nodes.Mesh_1.geometry}
         material={capMaterial}
       />
     </group>
@@ -87,21 +82,21 @@ function Collisions() {
   usePlane(() => ({ position: [0, 4, 0], rotation: [Math.PI / 2, 0, 0] }));
   const [, api] = useSphere(() => ({ type: "Kinematic", args: [2] }));
   return useFrame((state) =>
-    api.position.set((state.mouse.x * viewport.width) / 2, 2.5)
+    api.position.set(
+      (state.mouse.x * viewport.width) / 2,
+      (state.mouse.y * viewport.height) / 2,
+      2.5
+    )
   );
 }
+
 export const App = () => (
   <Canvas
     shadows
     dpr={1.5}
-    gl={{
-      alpha: true,
-      stencil: false,
-      depth: false,
-      antialias: false
-    }}
+    gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
     camera={{ position: [0, 0, 20], fov: 35, near: 10, far: 40 }}
-    onCreated={(state) => (state.mouse.toneMappingExposure = 1.5)}
+    onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
   >
     <ambientLight intensity={0.75} />
     <spotLight
@@ -113,14 +108,14 @@ export const App = () => (
       shadow-mapSize={[512, 512]}
     />
     <directionalLight position={[0, 5, -4]} intensity={4} />
+    <directionalLight position={[0, -15, -0]} intensity={4} color="red" />
     <Physics gravity={[0, 0, 0]} iterations={10} broadphase="SAP">
       <Collisions />
-
-      {baubles.map((props, i) => (
-        <Bauble key={i} {...props} />
-      ))}
+      {
+        baubles.map((props, i) => <Bauble key={i} {...props} />) /* prettier-ignore */
+      }
     </Physics>
-    <Environment files="/adamsbridge.hdr" />
+    <Environment preset="warehouse" />
     <EffectComposer multisampling={0}>
       <SSAO
         samples={11}
