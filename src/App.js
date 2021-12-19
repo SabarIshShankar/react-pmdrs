@@ -12,7 +12,7 @@ import { EffectComposer, SSAO } from "@react-three/postprocessing";
 
 const baubleMaterial = new THREE.MeshLambertMaterial({
   color: "#c0a090",
-  emissive: "red"
+  emissive: "black"
 });
 const capMaterial = new THREE.MeshStandardMaterial({
   metalness: 1,
@@ -108,7 +108,7 @@ export const App = () => (
       shadow-mapSize={[512, 512]}
     />
     <directionalLight position={[0, 5, -4]} intensity={4} />
-    <directionalLight position={[0, -15, -0]} intensity={4} color="red" />
+    <directionalLight position={[0, -15, -0]} intensity={4} color="black" />
     <Physics gravity={[0, 0, 0]} iterations={10} broadphase="SAP">
       <Collisions />
       {
@@ -122,14 +122,14 @@ export const App = () => (
         radius={30}
         intensity={20}
         luminanceInfluence={0.6}
-        color="red"
+        color="black"
       />
       <SSAO
         samples={21}
         radius={5}
         intensity={30}
         luminanceInfluence={0.6}
-        color="red"
+        color="black"
       />
     </EffectComposer>
   </Canvas>

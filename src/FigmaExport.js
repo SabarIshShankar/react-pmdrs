@@ -153,7 +153,7 @@ export function Underlay() {
             letterSpacing: -10
           }}
         >
-          X
+          SPACE
         </p>
         <div style={{ width: 10 }} />
         <p
@@ -167,7 +167,6 @@ export function Underlay() {
             letterSpacing: -10
           }}
         >
-          01-
         </p>
       </div>
       <div style={{ height: 60 }} />
